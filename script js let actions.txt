@@ -1,0 +1,27 @@
+script.js
+let actions = JSON.parse(localStorage.getItem("actions")) || [];
+
+function renderActions() {
+  const list = document.getElementById("actionList");
+  list.innerHTML = "";
+
+  actions.forEach((action, index) => {
+    const li = document.createElement("li");
+    li.textContent = action;
+    list.appendChild(li);
+  });
+}
+
+function addAction() {
+  const input = document.getElementById("actionInput");
+
+  if (input.value.trim() === "") return;
+
+  actions.push(input.value);
+  localStorage.setItem("actions", JSON.stringify(actions));
+
+  input.value = "";
+  renderActions();
+}
+
+renderActions();
